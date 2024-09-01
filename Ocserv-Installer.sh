@@ -262,6 +262,7 @@ function OCSERV_INSTALL() {
   echo -e "${GREEN}DONE${EC}"
   # Install OCServ and Certbot
   echo -e "${GREEN}Installing OCServ...${EC}"
+  apt-get install software-properties-common -y
   sudo gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5D8254EE27F87379
   yes | sudo add-apt-repository ppa:eisaev/ocserv
   apt-get update
