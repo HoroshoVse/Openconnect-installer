@@ -262,7 +262,23 @@ function OCSERV_INSTALL() {
   echo -e "${GREEN}DONE${EC}"
   # Install OCServ and Certbot
   echo -e "${GREEN}Installing OCServ...${EC}"
-  apt-get install -y ocserv
+ 
+  apt-get install -y libgnutls28-dev libev-dev
+  wget -P /opt/ https://www.infradead.org/ocserv/download/ocserv-1.3.0.tar.xz
+  tar -xvf /opt/ocserv-1.3.0.tar.xz -C /opt/ 
+  cd /opt/ocserv-1.3.0
+  ./configure --prefix= --enable-oidc-auth
+  make && make install
+  mkdir -p /etc/ocserv/
+  cp doc/sample.config /etc/ocserv/ocserv.conf
+  cp doc/sample.passwd /etc/ocserv/
+  cp doc/sample.otp /etc/ocserv/
+  cp doc/profile.xml /etc/ocserv/
+  cp doc/systemd/standalone/ocserv.service /lib/systemd/system/
+  systemctl daemon-reload
+  systemctl enable ocserv.service
+  
+
   echo -e "${GREEN}DONE${EC}"
   echo -e "${GREEN}Installing Certbot...${EC}"
   apt-get install -y certbot
