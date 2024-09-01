@@ -262,20 +262,15 @@ function OCSERV_INSTALL() {
   echo -e "${GREEN}DONE${EC}"
   # Install OCServ and Certbot
   echo -e "${GREEN}Installing OCServ...${EC}"
-  apt-get install -y libgnutls28-dev libev-dev
-  wget -P /opt/ https://www.infradead.org/ocserv/download/ocserv-1.3.0.tar.xz
-  tar -xvf /opt/ocserv-1.3.0.tar.xz -C /opt/ 
-  cd /opt/ocserv-1.3.0
-  ./configure --prefix= --enable-oidc-auth
-  make && make install
-  mkdir -p /etc/ocserv/
-  cp doc/sample.config /etc/ocserv/ocserv.conf
-  cp doc/sample.passwd /etc/ocserv/
-  cp doc/sample.otp /etc/ocserv/
-  cp doc/profile.xml /etc/ocserv/
-  cp doc/systemd/standalone/ocserv.service /lib/systemd/system/
-  systemctl daemon-reload
-  systemctl enable ocserv.service
+  apt install -y git build-essential libgnutls28-dev libev-dev autoconf automake libtool libpam0g-dev liblz4-dev libseccomp-dev libreadline-dev libnl-route-3-dev libkrb5-dev libradcli-dev libcurl4-gnutls-dev libcjose-dev libjansson-dev liboath-dev libprotobuf-c-dev libtalloc-dev libhttp-parser-dev protobuf-c-compiler gperf iperf3 lcov libuid-wrapper libpam-wrapper libnss-wrapper libsocket-wrapper gss-ntlmssp haproxy iputils-ping freeradius gawk gnutls-bin iproute2 yajl-tools tcpdump
+  git clone -b 1.3.0 https://gitlab.com/openconnect/ocserv
+  cd ocserv
+  autoreconf -fvi
+  ./configure --prefix=/usr
+  make
+  sudo make install
+  sudo systemctl enable ocserv
+  sudo systemctl start ocserv
   echo -e "${GREEN}DONE${EC}"
   echo -e "${GREEN}Installing Certbot...${EC}"
   apt-get install -y certbot
