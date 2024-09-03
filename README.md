@@ -2,12 +2,12 @@
   <img width="400" height="300" src="https://user-images.githubusercontent.com/118496203/203834573-5180b92c-eccf-4d29-a866-244f607f079f.png">
 </p>
 
-# Secured OCSERV+LetsEncrypt+Menu (Ubuntu 18.04 , 20.04 , 22.04)
+# Secured OCSERV+LetsEncrypt+Menu (Ubuntu 22.04) v.1.2.4 
 A script that allows you to install and configure OpenConnect and LetsEncrypt on your Ubuntu server in the simplest way.
 
 #### Compatibility
 
-*   Ubuntu 18.04 - 20.04 - 22.04
+*   Ubuntu 22.04
 
 #### Requirement
 * A domain is required to obtain the Certificate (If you want to buy a cheap domain, you can buy one from NameCheap. Namecheap also supports cryptocurrency payment method + free whois privacy protection
@@ -44,6 +44,12 @@ chmod +x Ocserv-Installer.sh
 ./Ocserv-Installer.sh
 ```
 Now answer a few simple questions and wait for the installation and configuration to finish.
+After install:
+```
+iptables -t nat  -A POSTROUTING -s 10.10.10.0/24 -o ens3 -j SNAT --to-source <IP VPS>
+apt-get install iptables-persistent
+```
+
 
 that's it!
 
