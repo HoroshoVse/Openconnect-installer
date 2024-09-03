@@ -50,6 +50,16 @@ After install:
 iptables -t nat  -A POSTROUTING -s 10.10.10.0/24 -o ens3 -j SNAT --to-source <IP VPS>
 apt-get install iptables-persistent
 ```
+```
+nano /etc/ocserv/ocserv.conf
+```
+and comment
+
+```
+#route = 10.10.10.0/8
+```
+
+
 
 
 that's it!
