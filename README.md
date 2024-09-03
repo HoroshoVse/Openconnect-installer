@@ -44,6 +44,7 @@ chmod +x Ocserv-Installer.sh
 ./Ocserv-Installer.sh
 ```
 Now answer a few simple questions and wait for the installation and configuration to finish.
+
 After install:
 ```
 iptables -t nat  -A POSTROUTING -s 10.10.10.0/24 -o ens3 -j SNAT --to-source <IP VPS>
