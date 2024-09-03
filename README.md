@@ -59,6 +59,8 @@ and comment
 #route = 10.10.10.0/8
 ```
 
+restart service
+
 
 
 
